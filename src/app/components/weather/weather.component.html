@@ -1,0 +1,23 @@
+<form class="weather-form" (ngSubmit)="fetchWeatherData(city)">
+    <label class="weather-label" for="city">City:</label>
+    <input type="text" [(ngModel)]="city" name="city" placeholder="Copenhagen" class="weather-input">
+    <button type="submit" class="weather-button">Get Weather</button>
+</form>
+
+
+<div class="status-message" *ngIf="loading">
+    Loading...
+</div>
+
+<div class="status-message" *ngIf="error">
+    Error fetching weather data.
+</div>
+
+<div class="weather-data" *ngIf="!loading && weatherData">
+    <h2>Weather Forecast</h2>
+    <div class="weather-details">
+        <p>Temperature: {{ weatherData.main.temp }}°C</p>
+        <p>Description: {{ weatherData.weather[0].description }}</p>
+        <img [src]="getWeatherIconUrl(weatherData.weather[0].icon)" alt="Weather Icon" class="weather-icon">
+    </div>
+</div>
